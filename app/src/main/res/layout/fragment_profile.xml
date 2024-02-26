@@ -1,14 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- res/layout/fragment_profile.xml -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProfileFragment">
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- Benutzername -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textViewUsernameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Benutzername:"
+        android:textSize="18sp"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewUsernameLabel"
+        android:layout_marginTop="8dp"
+        android:text="Max Mustermann"
+        android:textSize="16sp"/>
+
+    <!-- E-Mail -->
+    <TextView
+        android:id="@+id/textViewEmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewUsername"
+        android:layout_marginTop="16dp"
+        android:text="E-Mail:"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewEmailLabel"
+        android:text="max@example.com"
+        android:textSize="16sp"/>
+
+    <!-- Passwort -->
+    <TextView
+        android:id="@+id/textViewPasswordLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewEmail"
+        android:layout_marginTop="16dp"
+        android:text="Passwort:"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPasswordLabel"
+        android:text="********"
+        android:textSize="16sp"/>
+
+    <!-- Buttons zum Ändern -->
+    <Button
+        android:id="@+id/buttonChangeUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPassword"
+        android:layout_marginTop="24dp"
+        android:text="Benutzername ändern"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/buttonChangeEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonChangeUsername"
+        android:layout_marginTop="8dp"
+        android:text="E-Mail ändern"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/buttonChangePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonChangeEmail"
+        android:layout_marginTop="8dp"
+        android:text="Passwort ändern"
+        android:textSize="16sp"/>
+</RelativeLayout>

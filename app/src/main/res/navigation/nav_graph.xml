@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
-
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardDetailFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.CardDetailFragment"
+        android:label="CardDetailFragment" />
+    <fragment
+        android:id="@+id/detailDeckFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.DetailDeckFragment"
+        android:label="DetailDeckFragment" />
+    <fragment
+        android:id="@+id/myDecksFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.MyDecksFragment"
+        android:label="MyDecksFragment" >
+        <action
+            android:id="@+id/action_myDecksFragment_to_detailDeckFragment"
+            app:destination="@id/detailDeckFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.LogInFragment"
+        android:label="LogInFragment" >
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>

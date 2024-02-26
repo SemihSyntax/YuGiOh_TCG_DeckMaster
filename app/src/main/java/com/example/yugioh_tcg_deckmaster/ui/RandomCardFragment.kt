@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.R
-import com.example.yugioh_tcg_deckmaster.adapter.SearchAdapter
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentSearchBinding
-class SearchFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
+class RandomCardFragment : Fragment() {
+    private lateinit var binding: FragmentRandomCardBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -23,22 +21,16 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        binding = FragmentRandomCardBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = SearchAdapter()
-        binding.rvSearchResults.adapter = adapter
-
-        viewModel.searchResults.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-
-        binding.editTextSearch.addTextChangedListener {
-            viewModel.searchCardByName(it.toString())
+        viewModel.getRandomCard()
+        viewModel.randomCard.observe(viewLifecycleOwner) {
+                binding.ivChatContactImage.load(it.card_images.first().image_url_small)
         }
     }
 }

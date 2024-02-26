@@ -14,10 +14,10 @@
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Search" />
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/myDecksFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="Profile" />
+        android:title="My Decks" />
 
 </menu>

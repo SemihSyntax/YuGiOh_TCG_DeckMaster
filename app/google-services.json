@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "400624519525",
+    "project_id": "yugioh-tcg-deckmaster",
+    "storage_bucket": "yugioh-tcg-deckmaster.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400624519525:android:deb417d89fc2e1ea48398c",
+        "android_client_info": {
+          "package_name": "com.example.yugioh_tcg_deckmaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdDE6u5CO_t4r1TkR9TFA60pZ5qcpNCaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

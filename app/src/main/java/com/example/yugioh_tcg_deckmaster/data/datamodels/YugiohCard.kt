@@ -4,7 +4,7 @@ data class YugiohCard(
     val id: Int,
     val name: String,
     val type: String,
-    val frameType: String,
+    val frameType: String? = null,
     val desc: String,
     val atk: Int? = null,
     val def: Int? = null,
@@ -15,7 +15,8 @@ data class YugiohCard(
     val scale: Int? = null,
     val linkval: String? = null,
     val linkmarkers: List<String>? = null,
-    val card_sets: List<CardSet>,
+    val card_sets: List<CardSet>? = null,
+    val card_images: List<CardImage>,
     val banlist_info: Banlist? = null,
     val card_prices: List<CardPrice>
 )

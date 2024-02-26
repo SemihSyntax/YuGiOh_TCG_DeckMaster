@@ -8,6 +8,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 const val BASE_URL = "https://db.ygoprodeck.com/api/v7/"
 
@@ -22,11 +23,19 @@ private val retrofit  = Retrofit.Builder()
 
 interface DeckMasterApiService {
 
+    @GET("cardinfo.php?banlist=tcg")
+    suspend fun getBanList(): YugiohCardData
+
     @GET("cardinfo.php")
-    suspend fun getAllCards(): YugiohCardData
+    suspend fun searchCardByName(@Query("fname") name: String,
+                                 @Query("language") language: String = "de") : YugiohCardData
 
     @GET("randomcard.php")
     suspend fun getRandomCard(): YugiohCard
+
+    @GET("cardinfo.php")
+    suspend fun getAllCards(@Query ("language") language: String = "de"): YugiohCardData
+
 
     @GET("cardsets.php")
     suspend fun getAllCardSets(): YugiohSetData
