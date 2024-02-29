@@ -7,10 +7,5 @@ data class Deck(
     var mainDeck: List<YugiohCard>,
     var extraDeck: List<YugiohCard>,
     var sideDeck: List<YugiohCard>,
-    var name: String,
-    var cardCount: Int
-) {
-    init {
-        require(cardCount >= 0) { "cardCount cannot be negative" }
-    }
-}
+    var name: String
+)

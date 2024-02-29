@@ -33,6 +33,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     var selectedCard: YugiohCard? = null
 
+    var selectedDeck: Deck? = null
+
+    val allArchetypes = repository.allArchetypes
+
+
+    fun getAllArchetypes() {
+        viewModelScope.launch {
+            try {
+                repository.getAllArchetypes()
+            } catch (e: Exception) {
+                Log.e("MVM","$e")
+            }
+        }
+    }
+
 
     fun getAllCards() {
         viewModelScope.launch {

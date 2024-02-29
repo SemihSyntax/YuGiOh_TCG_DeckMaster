@@ -42,10 +42,10 @@ class MyDecksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = MyDecksAdapter()
+        val adapter = MyDecksAdapter(viewModel)
         binding.rvMyDecks.adapter = adapter
 
-        // RV wird nicht angezeigt?
+
         fireBaseViewModel.myDecks.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
@@ -72,7 +72,7 @@ class MyDecksFragment : Fragment() {
             .setPositiveButton("Erstellen") { _, _ ->
                 val deckName = inputField.text.toString()
                 // Hier wird der Code für das Hinzufügen des leeren Decks mit dem Namen ausgeführt
-                val newDeck = Deck(Timestamp.now(), emptyList(), emptyList(), emptyList(), deckName, 0)
+                val newDeck = Deck(Timestamp.now(), emptyList(), emptyList(), emptyList(), deckName)
                 fireBaseViewModel.addDeckToFireBase(newDeck)
 
                 // Optional: Aktualisiere die UI, um das neue Deck anzuzeigen

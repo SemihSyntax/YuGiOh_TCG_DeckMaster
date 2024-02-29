@@ -5,21 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
-import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.R
+import com.example.yugioh_tcg_deckmaster.adapter.ArchetypeAdapter
 import com.example.yugioh_tcg_deckmaster.adapter.BanlistAdapter
-import com.example.yugioh_tcg_deckmaster.adapter.SearchAdapter
+import com.example.yugioh_tcg_deckmaster.databinding.FragmentArchetypeBinding
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentBanlistBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentSearchBinding
 
-class BanlistFragment : Fragment() {
+class ArchetypeFragment : Fragment() {
 
-    private lateinit var binding: FragmentBanlistBinding
+    private lateinit var binding: FragmentArchetypeBinding
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -27,23 +24,23 @@ class BanlistFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentBanlistBinding.inflate(layoutInflater)
+        binding = FragmentArchetypeBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getBanList()
+        viewModel.getAllArchetypes()
 
-        val adapter = BanlistAdapter(viewModel)
-        binding.rvBanlistTcg.adapter = adapter
+        val adapter = ArchetypeAdapter()
+        binding.rvAllArchetypes.adapter = adapter
 
-        viewModel.banListTcg.observe(viewLifecycleOwner) {
+        viewModel.allArchetypes.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
-        binding.mtbBanListTCV.setNavigationOnClickListener {
+        binding.mtbAllArchetypes.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
     }

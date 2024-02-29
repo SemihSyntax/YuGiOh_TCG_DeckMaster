@@ -35,16 +35,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMainDeck"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainDeckTitle"
         app:layout_constraintStart_toEndOf="@+id/expandMainDeck"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone"
+        tools:listitem="@layout/item_deck_detail"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="6"/>
+        app:spanCount="8" />
 
     <!-- Extra Deck Section -->
     <androidx.appcompat.widget.AppCompatImageView
@@ -74,7 +72,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewExtraDeck"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/textViewExtraDeckTitle"
         app:layout_constraintStart_toEndOf="@+id/expandExtraDeck"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +111,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSideDeck"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/textViewSideDeckTitle"
         app:layout_constraintStart_toEndOf="@+id/expandSideDeck"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,6 +133,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_arrow_back_24"
-        app:title="Deck Name" />
+        app:title="Deck Name"
+        app:navigationIconTint="?attr/colorOnPrimary"
+        app:titleTextColor="?attr/colorOnPrimary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

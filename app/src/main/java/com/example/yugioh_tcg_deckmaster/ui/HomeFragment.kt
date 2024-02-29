@@ -66,6 +66,10 @@ class HomeFragment : Fragment() {
         binding.btnCalculator.setOnClickListener {
             findNavController().navigate(R.id.lifePointsFragment)
         }
+
+        binding.btnArchetypes.setOnClickListener {
+            findNavController().navigate(R.id.archetypeFragment)
+        }
     }
 }
 

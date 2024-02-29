@@ -1,5 +1,6 @@
 package com.example.yugioh_tcg_deckmaster.data.remote
 
+import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSetData
@@ -39,6 +40,9 @@ interface DeckMasterApiService {
 
     @GET("cardinfo.php")
     suspend fun getCardById(@Query ("id") id: Int): YugiohCardData
+
+    @GET("archetypes.php")
+    suspend fun getAllArchetypes() : List<Archetype>
 
     @GET("cardsets.php")
     suspend fun getAllCardSets(): YugiohSetData

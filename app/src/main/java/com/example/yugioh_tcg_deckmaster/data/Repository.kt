@@ -3,6 +3,7 @@ package com.example.yugioh_tcg_deckmaster.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSet
@@ -28,6 +29,20 @@ class Repository(private val api: DeckMasterApi) {
     private val _allCards = MutableLiveData<List<YugiohCard>?>()
     val allCards: LiveData<List<YugiohCard>?>
         get() = _allCards
+
+    private val _allArchetypes = MutableLiveData<List<Archetype>>()
+    val allArchetypes: LiveData<List<Archetype>>
+        get() = _allArchetypes
+
+
+    suspend fun getAllArchetypes() {
+        try {
+            val response = api.retrofitService.getAllArchetypes()
+            _allArchetypes.postValue(response)
+        } catch (e: Exception) {
+            Log.e("Repo","Failed to load all archetypes from API $e")
+        }
+    }
 
 
     suspend fun getAllCards() {

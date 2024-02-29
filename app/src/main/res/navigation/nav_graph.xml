@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_lifePointsFragment"
             app:destination="@id/lifePointsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_archetypeFragment"
+            app:destination="@id/archetypeFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -80,4 +83,8 @@
         android:id="@+id/lifePointsFragment"
         android:name="com.example.yugioh_tcg_deckmaster.ui.LifePointsFragment"
         android:label="LifePointsFragment" />
+    <fragment
+        android:id="@+id/archetypeFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.ArchetypeFragment"
+        android:label="ArchetypeFragment" />
 </navigation>

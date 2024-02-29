@@ -153,8 +153,7 @@ class FireBaseViewModel : ViewModel() {
             "deckName" to deck.name,
             "mainDeck" to convertCardToMap(deck.mainDeck),
             "extraDeck" to convertCardToMap(deck.extraDeck),
-            "sideDeck" to convertCardToMap(deck.sideDeck),
-            "cardCount" to deck.cardCount
+            "sideDeck" to convertCardToMap(deck.sideDeck)
         )
 
         documentRef?.collection("myDecks")?.document(timeStamp.toString())
@@ -197,7 +196,6 @@ class FireBaseViewModel : ViewModel() {
                     extraDeck = extraDeck,
                     sideDeck = sideDeck,
                     name = document.get("deckName") as String,
-                    cardCount = (document.get("cardCount") as Number).toInt(),
                     timeStamp = document.get("timeStamp") as Timestamp
                 )
 
@@ -222,8 +220,7 @@ class FireBaseViewModel : ViewModel() {
                 "deckName" to updatedDeck.name,
                 "mainDeck" to convertCardToMap(updatedDeck.mainDeck),
                 "extraDeck" to convertCardToMap(updatedDeck.extraDeck),
-                "sideDeck" to convertCardToMap(updatedDeck.sideDeck),
-                "cardCount" to updatedDeck.cardCount
+                "sideDeck" to convertCardToMap(updatedDeck.sideDeck)
                 // Füge hier weitere Felder hinzu, wenn notwendig
             ).toMap()
 
