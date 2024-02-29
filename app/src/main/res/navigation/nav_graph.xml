@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_profileFragment2"
             app:destination="@id/profileFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_banlistFragment"
+            app:destination="@id/banlistFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_lifePointsFragment"
+            app:destination="@id/lifePointsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -29,7 +35,11 @@
     <fragment
         android:id="@+id/detailDeckFragment"
         android:name="com.example.yugioh_tcg_deckmaster.ui.DetailDeckFragment"
-        android:label="DetailDeckFragment" />
+        android:label="DetailDeckFragment" >
+        <action
+            android:id="@+id/action_detailDeckFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myDecksFragment"
         android:name="com.example.yugioh_tcg_deckmaster.ui.MyDecksFragment"
@@ -58,4 +68,16 @@
             android:id="@+id/action_signUpFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/banlistFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.BanlistFragment"
+        android:label="BanlistFragment" >
+        <action
+            android:id="@+id/action_banlistFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lifePointsFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.LifePointsFragment"
+        android:label="LifePointsFragment" />
 </navigation>

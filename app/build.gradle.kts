@@ -73,4 +73,6 @@ dependencies {
     // implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
     implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
 
+    implementation ("org.jsoup:jsoup:1.14.3")
+
 }

@@ -4,8 +4,10 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.yugioh_tcg_deckmaster.data.Repository
+import com.example.yugioh_tcg_deckmaster.data.datamodels.Deck
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSetData
@@ -17,6 +19,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = Repository(DeckMasterApi)
 
 
+    init {
+        getAllCards()
+    }
 
     val banListTcg = repository.banListTcg
 
@@ -26,6 +31,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val allCards = repository.allCards
 
+    var selectedCard: YugiohCard? = null
 
 
     fun getAllCards() {
@@ -37,11 +43,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
     fun getBanList() {
         viewModelScope.launch {
             try {
                 repository.getBanList()
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("MVM", "$e")
             }
         }
@@ -53,6 +60,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 repository.searchCardByName(name)
             } catch (e: Exception) {
                 Log.e("MVM", "$e")
+            }
+        }
+    }
+
+    fun searchCard(name: String) {
+        viewModelScope.launch {
+            try {
+                repository.searchCard(name)
+            } catch (e:Exception) {
+                Log.e("MVM","$e")
             }
         }
     }

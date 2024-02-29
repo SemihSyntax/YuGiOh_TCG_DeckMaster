@@ -15,8 +15,8 @@ class Repository(private val api: DeckMasterApi) {
         get() = _banListTcg
 
 
-    private val _searchResults = MutableLiveData<List<YugiohCard>>()
-    val searchResults : LiveData<List<YugiohCard>>
+    private val _searchResults = MutableLiveData<List<YugiohCard>?>()
+    val searchResults : LiveData<List<YugiohCard>?>
         get() = _searchResults
 
 
@@ -25,8 +25,8 @@ class Repository(private val api: DeckMasterApi) {
         get() = _randomCard
 
 
-    private val _allCards = MutableLiveData<List<YugiohCard>>()
-    val allCards: LiveData<List<YugiohCard>>
+    private val _allCards = MutableLiveData<List<YugiohCard>?>()
+    val allCards: LiveData<List<YugiohCard>?>
         get() = _allCards
 
 
@@ -56,10 +56,25 @@ class Repository(private val api: DeckMasterApi) {
         }
     }
 
+    private fun sanitizeCardName(name: String): String {
+        // Entferne Leerzeichen und Sonderzeichen aus dem Namen
+        return name.replace(Regex("[^a-z0-9]"), "")
+    }
+
+    suspend fun searchCard(name: String) {
+        val sanitizedName = sanitizeCardName(name.lowercase())
+
+        val filteredCards = _allCards.value?.filter {
+            sanitizeCardName(it.name.lowercase()).contains(sanitizedName)
+        }
+
+        _searchResults.postValue(filteredCards)
+    }
+
     suspend fun getRandomCard() {
         try {
             val response = api.retrofitService.getRandomCard()
-            _randomCard.postValue(response)
+            _randomCard.postValue(api.retrofitService.getCardById(response.id).data.first())
         } catch (e: Exception) {
             Log.e("Repo", "Failed to load random card from API $e")
         }

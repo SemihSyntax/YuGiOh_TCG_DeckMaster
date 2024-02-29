@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.R
@@ -30,7 +32,10 @@ class CardDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.mtDetailCard.setNavigationOnClickListener {
-
+            findNavController().navigateUp()
         }
+
+        binding.wvDetailCard.webViewClient = WebViewClient()
+        binding.wvDetailCard.loadUrl(viewModel.selectedCard?.ygoprodeck_url.toString())
     }
 }

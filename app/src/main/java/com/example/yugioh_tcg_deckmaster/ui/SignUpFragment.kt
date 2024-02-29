@@ -8,16 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
-import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
-    private val viewModel: FireBaseViewModel by activityViewModels()
+    private val fireBaseViewModel: FireBaseViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +30,7 @@ class SignUpFragment : Fragment() {
         binding.btnSignUp.setOnClickListener {
 
             if (binding.etSignUpPassword.text.toString() == binding.etSignUpRepeatPassword.text.toString()) {
-                viewModel.register(binding.etEmail.text.toString(), binding.etSignUpPassword.text.toString())
-                // findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLogInFragment())
+                fireBaseViewModel.register(binding.etEmail.text.toString(), binding.etSignUpPassword.text.toString(), binding.etNewUsername.text.toString())
             } else {
                 Toast.makeText(requireContext(), "Passwörter stimmen nicht überein!", Toast.LENGTH_SHORT).show()
             }

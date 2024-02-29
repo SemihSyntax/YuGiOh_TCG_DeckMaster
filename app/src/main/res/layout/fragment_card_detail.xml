@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="16dp"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +22,7 @@
             android:id="@+id/ivDetailCard"
             android:layout_width="wrap_content"
             android:layout_height="300dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,6 +35,7 @@
             android:layout_marginTop="16dp"
             android:text="Beschreibung:"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivDetailCard" />
 
@@ -43,8 +45,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="You can Special Summon this card (from your hand) by discarding 1 Level 5 or higher DARK monster. Once per turn: You can discard 1 DARK monster; send 1 DARK monster from your Deck to the GY."
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDetailCardDescriptionTitle" />
+
+        <WebView
+            android:id="@+id/wvDetailCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivDetailCard" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.appbar.MaterialToolbar

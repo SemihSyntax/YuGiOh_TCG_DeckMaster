@@ -23,8 +23,9 @@ private val retrofit  = Retrofit.Builder()
 
 interface DeckMasterApiService {
 
-    @GET("cardinfo.php?banlist=tcg")
-    suspend fun getBanList(): YugiohCardData
+    @GET("cardinfo.php")
+    suspend fun getBanList(@Query("banlist") tcg: String = "tcg",
+                           @Query("language") language: String = "de") : YugiohCardData
 
     @GET("cardinfo.php")
     suspend fun searchCardByName(@Query("fname") name: String,
@@ -36,6 +37,8 @@ interface DeckMasterApiService {
     @GET("cardinfo.php")
     suspend fun getAllCards(@Query ("language") language: String = "de"): YugiohCardData
 
+    @GET("cardinfo.php")
+    suspend fun getCardById(@Query ("id") id: Int): YugiohCardData
 
     @GET("cardsets.php")
     suspend fun getAllCardSets(): YugiohSetData

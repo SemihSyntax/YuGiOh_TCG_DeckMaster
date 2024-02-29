@@ -7,42 +7,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import coil.load
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.navigation.fragment.findNavController
 import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.R
+import com.example.yugioh_tcg_deckmaster.adapter.BanlistAdapter
 import com.example.yugioh_tcg_deckmaster.adapter.SearchAdapter
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
+import com.example.yugioh_tcg_deckmaster.databinding.FragmentBanlistBinding
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentSearchBinding
-class SearchFragment : Fragment() {
 
-    private lateinit var binding: FragmentSearchBinding
+class BanlistFragment : Fragment() {
+
+    private lateinit var binding: FragmentBanlistBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val fireBaseViewModel: FireBaseViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        binding = FragmentBanlistBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = SearchAdapter(viewModel,fireBaseViewModel)
-        binding.rvSearchResults.adapter = adapter
+        viewModel.getBanList()
 
-        viewModel.searchResults.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.submitList(it)
-            }
+        val adapter = BanlistAdapter(viewModel)
+        binding.rvBanlistTcg.adapter = adapter
+
+        viewModel.banListTcg.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
         }
 
-        binding.editTextSearch.addTextChangedListener {
-            viewModel.searchCard(it.toString())
+        binding.mtbBanListTCV.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
 
     }
