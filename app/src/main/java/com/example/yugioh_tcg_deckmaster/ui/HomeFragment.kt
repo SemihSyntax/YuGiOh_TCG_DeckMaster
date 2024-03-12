@@ -1,6 +1,5 @@
 package com.example.yugioh_tcg_deckmaster.ui
 
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,20 +13,11 @@ import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.R
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentHomeBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jsoup.Jsoup
-import java.io.IOException
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by activityViewModels()
-    private val fireBaseViewModel: FireBaseViewModel by activityViewModels()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,9 +38,8 @@ class HomeFragment : Fragment() {
             Log.d("test2", "$it")
         }
 
-        // umändern zu navigate profile fragment und dort ausloggen können
         binding.mtbHomeFragment.setOnMenuItemClickListener {
-            fireBaseViewModel.logout()
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment2())
             true
         }
 

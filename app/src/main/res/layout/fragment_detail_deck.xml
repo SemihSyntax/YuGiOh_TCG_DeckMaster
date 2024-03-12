@@ -42,7 +42,7 @@
         android:layout_marginEnd="16dp"
         tools:listitem="@layout/item_deck_detail"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="8" />
+        app:spanCount="5" />
 
     <!-- Extra Deck Section -->
     <androidx.appcompat.widget.AppCompatImageView
@@ -81,7 +81,7 @@
         android:layout_marginBottom="16dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="6"/>
+        app:spanCount="5"/>
 
     <!-- Side Deck Section -->
     <androidx.appcompat.widget.AppCompatImageView
@@ -120,7 +120,7 @@
         android:layout_marginBottom="16dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="6"/>
+        app:spanCount="5"/>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/mtbDetailDeck"

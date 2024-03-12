@@ -86,5 +86,20 @@
     <fragment
         android:id="@+id/archetypeFragment"
         android:name="com.example.yugioh_tcg_deckmaster.ui.ArchetypeFragment"
-        android:label="ArchetypeFragment" />
+        android:label="ArchetypeFragment" >
+        <action
+            android:id="@+id/action_archetypeFragment_to_archetypeDetailFragment"
+            app:destination="@id/archetypeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/archetypeDetailFragment"
+        android:name="com.example.yugioh_tcg_deckmaster.ui.ArchetypeDetailFragment"
+        android:label="ArchetypeDetailFragment" >
+        <action
+            android:id="@+id/action_archetypeDetailFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+        <argument
+            android:name="archetype"
+            app:argType="string" />
+    </fragment>
 </navigation>

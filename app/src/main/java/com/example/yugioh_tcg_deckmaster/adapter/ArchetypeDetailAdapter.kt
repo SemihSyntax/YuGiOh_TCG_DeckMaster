@@ -11,16 +11,16 @@ import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.data.datamodels.Deck
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
-import com.example.yugioh_tcg_deckmaster.databinding.ItemSearchBinding
-import com.example.yugioh_tcg_deckmaster.ui.SearchFragmentDirections
+import com.example.yugioh_tcg_deckmaster.databinding.ItemArchetypeDetailBinding
+import com.example.yugioh_tcg_deckmaster.ui.ArchetypeDetailFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class SearchAdapter (private val viewModel : MainViewModel, private val fireBaseViewModel: FireBaseViewModel
+class ArchetypeDetailAdapter (private val viewModel : MainViewModel, private val fireBaseViewModel: FireBaseViewModel
 
-) : RecyclerView.Adapter<SearchAdapter.ItemViewHolder>(){
+) : RecyclerView.Adapter<ArchetypeDetailAdapter.ItemViewHolder>(){
 
     private var dataset = listOf<YugiohCard>()
-    inner class ItemViewHolder(val binding: ItemSearchBinding): RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: ItemArchetypeDetailBinding): RecyclerView.ViewHolder(binding.root)
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(newList: List<YugiohCard>) {
@@ -31,21 +31,21 @@ class SearchAdapter (private val viewModel : MainViewModel, private val fireBase
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding =
-            ItemSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemArchetypeDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val yugiohCard = dataset[position]
-        holder.binding.ivSearchCroppedImage.load(yugiohCard.card_images.first().image_url_cropped)
-        holder.binding.textViewCardName.text = yugiohCard.name
+        holder.binding.ivArchetypeDetailCroppedImage.load(yugiohCard.card_images.first().image_url_cropped)
+        holder.binding.tvArchetypeDetailCardName.text = yugiohCard.name
 
-        holder.binding.mcvSearchCard.setOnClickListener {
+        holder.binding.mcvArchetypeDetail.setOnClickListener {
             viewModel.selectedCard = yugiohCard
-            holder.itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCardDetailFragment())
+            holder.itemView.findNavController().navigate(ArchetypeDetailFragmentDirections.actionArchetypeDetailFragmentToCardDetailFragment())
         }
 
-        holder.binding.btnAddToDeck.setOnClickListener {
+        holder.binding.btnArchetypeDetailAddToDeck.setOnClickListener {
 
             showDeckSelectionDialog(holder, fireBaseViewModel.myDecks.value?: emptyList(), yugiohCard)
 

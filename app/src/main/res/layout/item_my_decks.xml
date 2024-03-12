@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Anzahl an Karten:"
+                android:text="Number of cards:"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvCardCountDeck"
                 app:layout_constraintTop_toTopOf="parent" />

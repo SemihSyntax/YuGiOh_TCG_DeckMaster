@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentLifePointsBinding
 import kotlin.math.max
 
@@ -39,6 +40,10 @@ class LifePointsFragment : Fragment() {
         // Set onClickListener for the Reset button
         binding.btnReset.setOnClickListener {
             resetLifePoints()
+        }
+
+        binding.mtLifePointsCalculator.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
     }
 

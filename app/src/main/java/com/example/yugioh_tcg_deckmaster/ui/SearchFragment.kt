@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import coil.load
 import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
 import com.example.yugioh_tcg_deckmaster.adapter.SearchAdapter
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentSearchBinding
 class SearchFragment : Fragment() {
 

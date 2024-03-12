@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- res/layout/fragment_profile.xml -->
 
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mtProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:navigationIconTint="?attr/colorOnPrimary"
+        app:title="Profile"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <!-- Benutzername -->
+
+    <!-- E-Mail -->
+
     <TextView
         android:id="@+id/textViewUsernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Benutzername:"
-        android:textSize="18sp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Username:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mtProfile" />
 
     <TextView
         android:id="@+id/textViewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewUsernameLabel"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Max Mustermann"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUsernameLabel" />
 
-    <!-- E-Mail -->
     <TextView
         android:id="@+id/textViewEmailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewUsername"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="E-Mail:"
-        android:textSize="18sp"/>
+        android:text="Email address:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewUsername" />
+
+    <!-- Button zum Ausloggen -->
 
     <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewEmailLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="max@example.com"
-        android:textSize="16sp"/>
-
-    <!-- Passwort -->
-    <TextView
-        android:id="@+id/textViewPasswordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewEmail"
-        android:layout_marginTop="16dp"
-        android:text="Passwort:"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/textViewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewPasswordLabel"
-        android:text="********"
-        android:textSize="16sp"/>
-
-    <!-- Buttons zum Ändern -->
-    <Button
-        android:id="@+id/buttonChangeUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewPassword"
-        android:layout_marginTop="24dp"
-        android:text="Benutzername ändern"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailLabel" />
 
     <Button
-        android:id="@+id/buttonChangeEmail"
+        android:id="@+id/buttonLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonChangeUsername"
-        android:layout_marginTop="8dp"
-        android:text="E-Mail ändern"
-        android:textSize="16sp"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Log out"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewEmail" />
 
-    <Button
-        android:id="@+id/buttonChangePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonChangeEmail"
-        android:layout_marginTop="8dp"
-        android:text="Passwort ändern"
-        android:textSize="16sp"/>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

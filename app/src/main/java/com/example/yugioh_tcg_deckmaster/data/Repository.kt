@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
-import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
-import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSet
 import com.example.yugioh_tcg_deckmaster.data.remote.DeckMasterApi
 
 class Repository(private val api: DeckMasterApi) {
@@ -33,6 +31,10 @@ class Repository(private val api: DeckMasterApi) {
     private val _allArchetypes = MutableLiveData<List<Archetype>>()
     val allArchetypes: LiveData<List<Archetype>>
         get() = _allArchetypes
+
+    private val _cardsByArchetype = MutableLiveData<List<YugiohCard>>()
+    val cardsbyArchetype: LiveData<List<YugiohCard>>
+        get() = _cardsByArchetype
 
 
     suspend fun getAllArchetypes() {
@@ -62,15 +64,6 @@ class Repository(private val api: DeckMasterApi) {
         }
     }
 
-    suspend fun searchCardByName(name: String) {
-        try {
-            val response = api.retrofitService.searchCardByName(name).data
-            _searchResults.postValue(response)
-        } catch (e: Exception) {
-            Log.e("Repo", "Failed to load searched cards by name from API $e")
-        }
-    }
-
     private fun sanitizeCardName(name: String): String {
         // Entferne Leerzeichen und Sonderzeichen aus dem Namen
         return name.replace(Regex("[^a-z0-9]"), "")
@@ -92,6 +85,15 @@ class Repository(private val api: DeckMasterApi) {
             _randomCard.postValue(api.retrofitService.getCardById(response.id).data.first())
         } catch (e: Exception) {
             Log.e("Repo", "Failed to load random card from API $e")
+        }
+    }
+
+    suspend fun getCardsByArchetype(archetype: String) {
+        try {
+            val response = api.retrofitService.getCardsByArchetype(archetype).data
+            _cardsByArchetype.postValue(response)
+        } catch (e: Exception) {
+            Log.e("Repo","Failed to load cards by archetype from API $e")
         }
     }
 

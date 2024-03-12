@@ -6,16 +6,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mtLifePointsCalculator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:navigationIconTint="?attr/colorOnPrimary"
+        app:title="Life Points Calculator"
+        app:titleTextColor="?attr/colorOnPrimary" />
+
     <!-- Player 1 -->
     <CheckBox
         android:id="@+id/checkBoxPlayer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spieler 1"
+        android:text="Player 1"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/mtLifePointsCalculator" />
 
     <TextView
         android:id="@+id/tvLifePointsPlayer1"
@@ -35,7 +50,7 @@
         android:id="@+id/checkBoxPlayer2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spieler 2"
+        android:text="Player 2"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +75,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:hint="Lebenspunkte ändern"
+        android:hint="Change life points"
         android:inputType="numberSigned"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Hinzufügen"
+        android:text="Add"
         app:layout_constraintEnd_toStartOf="@id/btnSubtract"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etLifePointsChange" />
@@ -85,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Abziehen"
+        android:text="Subtract"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAdd"
         app:layout_constraintTop_toBottomOf="@id/etLifePointsChange" />
@@ -97,7 +112,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Zurücksetzen"
+        android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnAdd" />

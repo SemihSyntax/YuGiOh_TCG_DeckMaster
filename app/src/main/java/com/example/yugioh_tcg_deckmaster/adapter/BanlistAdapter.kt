@@ -10,7 +10,6 @@ import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
 import com.example.yugioh_tcg_deckmaster.databinding.ItemBanlistBinding
 import com.example.yugioh_tcg_deckmaster.ui.BanlistFragmentDirections
-import com.example.yugioh_tcg_deckmaster.ui.SearchFragmentDirections
 
 class BanlistAdapter(private val viewModel: MainViewModel
 

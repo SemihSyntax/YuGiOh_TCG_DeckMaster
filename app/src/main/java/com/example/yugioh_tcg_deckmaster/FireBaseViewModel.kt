@@ -13,17 +13,18 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
-import kotlinx.coroutines.tasks.await
-import java.util.UUID
 
 class FireBaseViewModel : ViewModel() {
 
     val auth = Firebase.auth
     val firestore = Firebase.firestore
-    val storage = Firebase.storage
+//    val storage = Firebase.storage
+
+    private val _selectedDeck = MutableLiveData<Deck?>()
+    val selectedDeck: LiveData<Deck?>
+        get() = _selectedDeck
 
 
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
@@ -55,8 +56,6 @@ class FireBaseViewModel : ViewModel() {
         setupUserEnv()
         if (auth.currentUser != null) {
             Log.d("userId", auth.currentUser!!.uid)
-
-            getDecksFromFireBase()
         }
 
     }
@@ -115,17 +114,17 @@ class FireBaseViewModel : ViewModel() {
     }
 
 
-    fun uploadProfilePicture(uri: Uri) {
-
-        val imageRef = storage.reference.child("images/${auth.currentUser!!.uid}/profilePicture")
-        imageRef.putFile(uri).addOnCompleteListener {
-            if (it.isSuccessful) {
-                imageRef.downloadUrl.addOnCompleteListener { finalImageUrl ->
-                    profileRef.update("profilePicture", finalImageUrl.result.toString())
-                }
-            }
-        }
-    }
+//    fun uploadProfilePicture(uri: Uri) {
+//
+//        val imageRef = storage.reference.child("images/${auth.currentUser!!.uid}/profilePicture")
+//        imageRef.putFile(uri).addOnCompleteListener {
+//            if (it.isSuccessful) {
+//                imageRef.downloadUrl.addOnCompleteListener { finalImageUrl ->
+//                    profileRef.update("profilePicture", finalImageUrl.result.toString())
+//                }
+//            }
+//        }
+//    }
 
 
     fun getUserName() {
@@ -144,33 +143,26 @@ class FireBaseViewModel : ViewModel() {
 
     fun addDeckToFireBase(deck: Deck) {
 
-        val documentRef = auth.uid?.let { firestore.collection("user").document(it) }
-
         val timeStamp = Timestamp.now()
 
-        val deckData = hashMapOf(
-            "timeStamp" to timeStamp,
-            "deckName" to deck.name,
-            "mainDeck" to convertCardToMap(deck.mainDeck),
-            "extraDeck" to convertCardToMap(deck.extraDeck),
-            "sideDeck" to convertCardToMap(deck.sideDeck)
-        )
+        val deckData = deck.toHashMap()
 
-        documentRef?.collection("myDecks")?.document(timeStamp.toString())
-            ?.set(deckData)?.addOnSuccessListener {
+        profileRef.collection("myDecks").document(timeStamp.toString())
+            .set(deckData).addOnSuccessListener {
                 Log.e("FireBase", "Deck erfolgreich gespeichert")
-            }?.addOnFailureListener {
+            }.addOnFailureListener {
                 Log.e("FireBase", "Deck nicht gespeichert $it")
             }
     }
 
-    fun convertCardToMap(cards: List<YugiohCard>): List<HashMap<String, Any>> {
-        return cards.map { card ->
-            hashMapOf(
-                "id" to card.id,
-                "image" to card.card_images.firstOrNull()?.image_url.orEmpty()
-            )
-        }
+    fun deleteDeckFromFireBase(deck: Deck) {
+
+        profileRef.collection("myDecks").document(deck.timeStamp.toString())
+            .delete().addOnSuccessListener {
+                Log.e("FireBase", "Deck erfolgreich gelöscht")
+            }.addOnFailureListener {
+                Log.e("FireBase", "Deck nicht gelöscht $it")
+            }
     }
 
     fun getDecksFromFireBase() {
@@ -182,22 +174,8 @@ class FireBaseViewModel : ViewModel() {
         deckRefs.addSnapshotListener { snapshot, error ->
             decks.clear()
             snapshot?.forEach { document ->
-                val mainDeckList = document.get("mainDeck") as ArrayList<Map<String, Any?>>
-                val mainDeck = mainDeckList.map { YugiohCard.fromMap(it) }
 
-                val extraDeckList = document.get("extraDeck") as ArrayList<Map<String, Any?>>
-                val extraDeck = extraDeckList.map { YugiohCard.fromMap(it) }
-
-                val sideDeckList = document.get("sideDeck") as ArrayList<Map<String, Any?>>
-                val sideDeck = sideDeckList.map { YugiohCard.fromMap(it) }
-
-                val deck = Deck(
-                    mainDeck = mainDeck,
-                    extraDeck = extraDeck,
-                    sideDeck = sideDeck,
-                    name = document.get("deckName") as String,
-                    timeStamp = document.get("timeStamp") as Timestamp
-                )
+                val deck = document.data.let { Deck.fromMap(it) }
 
                 decks.add(deck)
             }
@@ -216,13 +194,7 @@ class FireBaseViewModel : ViewModel() {
 
             Log.d("UpdateDeck", updatedDeck.mainDeck.toString())
 
-            val updateData = hashMapOf(
-                "deckName" to updatedDeck.name,
-                "mainDeck" to convertCardToMap(updatedDeck.mainDeck),
-                "extraDeck" to convertCardToMap(updatedDeck.extraDeck),
-                "sideDeck" to convertCardToMap(updatedDeck.sideDeck)
-                // Füge hier weitere Felder hinzu, wenn notwendig
-            ).toMap()
+            val updateData = updatedDeck.toHashMap()
 
             deckReference.update(updateData)
                 .addOnSuccessListener {
@@ -236,5 +208,45 @@ class FireBaseViewModel : ViewModel() {
         }
     }
 
+    fun deleteCardFromDeckInFireBase(yugiohCard: YugiohCard, deck: Deck) {
+        // Verweise auf das Dokument
+        val docRef = profileRef.collection("myDecks").document(deck.timeStamp.toString())
+
+        // Dokument abrufen
+        docRef.get().addOnSuccessListener { document ->
+            val deckData = document.data
+
+            // Konvertieren Sie die Daten des Dokuments in ein Deck-Objekt
+            val deckFromFirestore = deckData?.let { Deck.fromMap(it) }
+
+            // Überprüfen, ob das Deck erfolgreich abgerufen wurde
+            if (deckFromFirestore != null) {
+                // Das Hauptdeck aktualisieren, um die Karte zu entfernen
+                val updatedMainDeck = deckFromFirestore.mainDeck.toMutableList()
+                updatedMainDeck.remove(yugiohCard)
+                deckFromFirestore.mainDeck = updatedMainDeck
+                _selectedDeck.value = deckFromFirestore
+
+                // Aktualisiertes Deck in Firestore speichern
+                docRef.set(deckFromFirestore.toHashMap())
+                    .addOnSuccessListener {
+                        Log.d("FireBase", "Karte erfolgreich aus dem Deck entfernt")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("FireBase", "Fehler beim Speichern des aktualisierten Decks", e)
+                    }
+            } else {
+                Log.e("FireBase", "Deck nicht gefunden")
+            }
+        }
+            .addOnFailureListener { e ->
+                Log.e("FireBase", "Fehler beim Abrufen des Dokuments", e)
+            }
+    }
+
+    fun setSelectedDeck(deck: Deck) {
+
+        _selectedDeck.value = deck
+    }
 
 }

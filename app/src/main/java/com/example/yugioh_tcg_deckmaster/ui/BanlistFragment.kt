@@ -5,17 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
-import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
 import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
 import com.example.yugioh_tcg_deckmaster.adapter.BanlistAdapter
-import com.example.yugioh_tcg_deckmaster.adapter.SearchAdapter
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentBanlistBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentSearchBinding
 
 class BanlistFragment : Fragment() {
 

@@ -3,7 +3,6 @@ package com.example.yugioh_tcg_deckmaster.data.remote
 import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
-import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSetData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -25,18 +24,13 @@ private val retrofit  = Retrofit.Builder()
 interface DeckMasterApiService {
 
     @GET("cardinfo.php")
-    suspend fun getBanList(@Query("banlist") tcg: String = "tcg",
-                           @Query("language") language: String = "de") : YugiohCardData
-
-    @GET("cardinfo.php")
-    suspend fun searchCardByName(@Query("fname") name: String,
-                                 @Query("language") language: String = "de") : YugiohCardData
+    suspend fun getBanList(@Query("banlist") tcg: String = "tcg") : YugiohCardData
 
     @GET("randomcard.php")
     suspend fun getRandomCard(): YugiohCard
 
     @GET("cardinfo.php")
-    suspend fun getAllCards(@Query ("language") language: String = "de"): YugiohCardData
+    suspend fun getAllCards(): YugiohCardData
 
     @GET("cardinfo.php")
     suspend fun getCardById(@Query ("id") id: Int): YugiohCardData
@@ -44,8 +38,8 @@ interface DeckMasterApiService {
     @GET("archetypes.php")
     suspend fun getAllArchetypes() : List<Archetype>
 
-    @GET("cardsets.php")
-    suspend fun getAllCardSets(): YugiohSetData
+    @GET("cardinfo.php")
+    suspend fun getCardsByArchetype(@Query ("archetype") archetype: String) : YugiohCardData
 
 }
 

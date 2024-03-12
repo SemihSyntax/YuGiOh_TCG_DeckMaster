@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentCardDetailBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentRandomCardBinding
 
 class CardDetailFragment : Fragment() {
 

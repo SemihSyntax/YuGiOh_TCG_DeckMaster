@@ -8,11 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import coil.load
 import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
-import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentHomeBinding
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentLogInBinding
 
 class LogInFragment : Fragment() {

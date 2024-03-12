@@ -20,30 +20,6 @@
         app:title="Yu-Gi-Oh TCG Deckmaster"
         app:titleTextColor="?attr/colorOnPrimary" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:text="Yu-Gi-Oh TCG Deckmaster"-->
-<!--        android:textSize="24sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/imageButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#00FFFFFF"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/tvTitle"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/tvTitle"-->
-<!--        app:srcCompat="@drawable/baseline_account_circle_24" />-->
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/NSV"
         android:layout_width="match_parent"
@@ -76,7 +52,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="TCG Bannliste"
+                android:text="Banlist TCG"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivHomeRandomCard" />
@@ -88,22 +64,10 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Themen Decks"
+                android:text="Archetypes"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnTcgBanList" />
-
-            <Button
-                android:id="@+id/btnCardSets"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:text="Karten Sets"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnArchetypes" />
 
             <Button
                 android:id="@+id/btnCalculator"
@@ -112,17 +76,17 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Lebenspunkte Rechner"
+                android:text="Life Points Calculator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnCardSets" />
+                app:layout_constraintTop_toBottomOf="@+id/btnArchetypes" />
 
             <TextView
                 android:id="@+id/tvHomeRandomCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Zufällige Karte"
+                android:text="Random Card"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"

@@ -8,11 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.yugioh_tcg_deckmaster.MainViewModel
-import com.example.yugioh_tcg_deckmaster.R
 import com.example.yugioh_tcg_deckmaster.adapter.ArchetypeAdapter
-import com.example.yugioh_tcg_deckmaster.adapter.BanlistAdapter
 import com.example.yugioh_tcg_deckmaster.databinding.FragmentArchetypeBinding
-import com.example.yugioh_tcg_deckmaster.databinding.FragmentBanlistBinding
 
 class ArchetypeFragment : Fragment() {
 

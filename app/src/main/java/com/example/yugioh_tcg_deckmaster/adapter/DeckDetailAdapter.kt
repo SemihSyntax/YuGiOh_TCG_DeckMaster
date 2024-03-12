@@ -1,17 +1,21 @@
 package com.example.yugioh_tcg_deckmaster.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
+import com.example.yugioh_tcg_deckmaster.FireBaseViewModel
+import com.example.yugioh_tcg_deckmaster.MainViewModel
 import com.example.yugioh_tcg_deckmaster.data.datamodels.Deck
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
-import com.example.yugioh_tcg_deckmaster.databinding.ItemArchetypeBinding
 import com.example.yugioh_tcg_deckmaster.databinding.ItemDeckDetailBinding
+import com.example.yugioh_tcg_deckmaster.ui.DetailDeckFragmentDirections
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DeckDetailAdapter(
+class DeckDetailAdapter(private val viewModel: MainViewModel, private val fireBaseViewModel: FireBaseViewModel, private val deck: Deck
 
 ) : RecyclerView.Adapter<DeckDetailAdapter.ItemViewHolder>(){
 
@@ -33,6 +37,34 @@ class DeckDetailAdapter(
         val yugiohCard = dataset[position]
 
         holder.binding.ivItemDeckCard.load(yugiohCard.card_images.first().image_url)
+
+        holder.binding.ivItemDeckCard.setOnClickListener {
+            viewModel.selectedCard = yugiohCard
+            Log.d("hilfeee",yugiohCard.toString())
+            holder.itemView.findNavController().navigate(DetailDeckFragmentDirections.actionDetailDeckFragmentToCardDetailFragment())
+        }
+
+        // In your activity or fragment
+        holder.binding.ivItemDeckCard.setOnLongClickListener {
+            // Create the dialog
+            MaterialAlertDialogBuilder(holder.itemView.context)
+                .setTitle("Delete Card")
+                .setMessage("Do you want to remove this card from the deck?")
+                .setPositiveButton("Yes") { dialog, _ ->
+                    // User clicked "Yes"
+                    fireBaseViewModel.deleteCardFromDeckInFireBase(yugiohCard, deck)
+                    dialog.dismiss() // Dismiss the dialog
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    // User clicked "No"
+                    dialog.dismiss() // Dismiss the dialog
+                }
+                .show()
+
+            true // Event handled
+        }
+
+
 
     }
 

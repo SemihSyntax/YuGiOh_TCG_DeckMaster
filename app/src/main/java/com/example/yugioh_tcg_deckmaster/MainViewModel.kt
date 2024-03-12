@@ -3,14 +3,9 @@ package com.example.yugioh_tcg_deckmaster
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.yugioh_tcg_deckmaster.data.Repository
-import com.example.yugioh_tcg_deckmaster.data.datamodels.Deck
 import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCard
-import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohCardData
-import com.example.yugioh_tcg_deckmaster.data.datamodels.YugiohSetData
 import com.example.yugioh_tcg_deckmaster.data.remote.DeckMasterApi
 import kotlinx.coroutines.launch
 
@@ -29,13 +24,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val randomCard = repository.randomCard
 
-    val allCards = repository.allCards
-
     var selectedCard: YugiohCard? = null
 
-    var selectedDeck: Deck? = null
-
     val allArchetypes = repository.allArchetypes
+
+    val cardsByArchetype = repository.cardsbyArchetype
 
 
     fun getAllArchetypes() {
@@ -44,6 +37,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 repository.getAllArchetypes()
             } catch (e: Exception) {
                 Log.e("MVM","$e")
+            }
+        }
+    }
+
+    fun getCardsByArchetype(archetype: String) {
+        viewModelScope.launch {
+            try {
+                repository.getCardsByArchetype(archetype)
+            } catch (e: Exception) {
+                Log.e("MVM", "$e")
             }
         }
     }
@@ -63,16 +66,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             try {
                 repository.getBanList()
-            } catch (e: Exception) {
-                Log.e("MVM", "$e")
-            }
-        }
-    }
-
-    fun searchCardByName(name: String) {
-        viewModelScope.launch {
-            try {
-                repository.searchCardByName(name)
             } catch (e: Exception) {
                 Log.e("MVM", "$e")
             }

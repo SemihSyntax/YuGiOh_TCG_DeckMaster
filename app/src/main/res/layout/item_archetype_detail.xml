@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcvSearchCard"
+        android:id="@+id/mcvArchetypeDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +22,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/ivSearchCroppedImage"
+                android:id="@+id/ivArchetypeDetailCroppedImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:adjustViewBounds="true"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewCardName"
+                android:id="@+id/tvArchetypeDetailCardName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -45,13 +45,13 @@
                 android:text="Card name"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/btnAddToDeck"
+                app:layout_constraintBottom_toTopOf="@+id/btnArchetypeDetailAddToDeck"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivSearchCroppedImage"
+                app:layout_constraintStart_toEndOf="@+id/ivArchetypeDetailCroppedImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btnAddToDeck"
+                android:id="@+id/btnArchetypeDetailAddToDeck"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                 android:text="Add to deck"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivSearchCroppedImage" />
+                app:layout_constraintStart_toEndOf="@+id/ivArchetypeDetailCroppedImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

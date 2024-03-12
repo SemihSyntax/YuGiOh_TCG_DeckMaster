@@ -3,11 +3,11 @@ package com.example.yugioh_tcg_deckmaster.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yugioh_tcg_deckmaster.data.datamodels.Archetype
-import com.example.yugioh_tcg_deckmaster.data.datamodels.Deck
 import com.example.yugioh_tcg_deckmaster.databinding.ItemArchetypeBinding
-import com.example.yugioh_tcg_deckmaster.databinding.ItemMyDecksBinding
+import com.example.yugioh_tcg_deckmaster.ui.ArchetypeFragmentDirections
 
 class ArchetypeAdapter(
 
@@ -31,6 +31,10 @@ class ArchetypeAdapter(
         val archetype = dataset[position]
 
         holder.binding.tvArchetype.text = archetype.archetype_name
+
+        holder.binding.mcvArchetype.setOnClickListener {
+            holder.itemView.findNavController().navigate(ArchetypeFragmentDirections.actionArchetypeFragmentToArchetypeDetailFragment(archetype.archetype_name))
+        }
 
     }
 
