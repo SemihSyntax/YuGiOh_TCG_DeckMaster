@@ -41,12 +41,14 @@ class ArchetypeDetailAdapter (private val viewModel : MainViewModel, private val
         holder.binding.tvArchetypeDetailCardName.text = yugiohCard.name
 
         holder.binding.mcvArchetypeDetail.setOnClickListener {
+            // Setzen der ausgewählten Karte im ViewModel
             viewModel.selectedCard = yugiohCard
             holder.itemView.findNavController().navigate(ArchetypeDetailFragmentDirections.actionArchetypeDetailFragmentToCardDetailFragment())
         }
 
         holder.binding.btnArchetypeDetailAddToDeck.setOnClickListener {
 
+            // Anzeigen eines Dialogs zur Auswahl des Decks
             showDeckSelectionDialog(holder, fireBaseViewModel.myDecks.value?: emptyList(), yugiohCard)
 
             Log.d("hilfe", "${fireBaseViewModel.myDecks.value}")
@@ -58,6 +60,7 @@ class ArchetypeDetailAdapter (private val viewModel : MainViewModel, private val
         return dataset.size
     }
 
+    // Funktion zum Anzeigen eines Dialogs zur Auswahl des Decks
     private fun showDeckSelectionDialog(holder: ItemViewHolder, decks: List<Deck>,card: YugiohCard) {
         val deckNames = decks.map {
             it.name

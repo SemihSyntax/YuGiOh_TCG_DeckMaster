@@ -14,24 +14,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Aktivität initialisieren und Layout binden
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Navigation Host Fragment finden und mit dem NavController verknüpfen
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         binding.bottomNavigationView.setupWithNavController(navHost.navController)
 
-
+        // Überwache Änderungen im NavController und passe die Sichtbarkeit der Bottom Navigation an
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-
                 R.id.cardDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
                 else -> binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
 
+        // Viewmodel für Firebase-Authentifizierung initialisieren
         val viewModel = ViewModelProvider(this)[FireBaseViewModel::class.java]
         val navController = navHost.navController
 
+        // Überprüfe den aktuellen Benutzerstatus und navigiere entsprechend
         viewModel.user.observe(this) {
             if (it == null) {
                 navController.navigate(R.id.logInFragment)
@@ -39,8 +42,5 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.homeFragment)
             }
         }
-
-
-
     }
 }

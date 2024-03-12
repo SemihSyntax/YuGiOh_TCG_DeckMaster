@@ -33,6 +33,7 @@ class ArchetypeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ruft die Karten für den angegebenen Archetyp ab
         viewModel.getCardsByArchetype(args.archetype)
 
         val adapter = ArchetypeDetailAdapter(viewModel,fireBaseViewModel)

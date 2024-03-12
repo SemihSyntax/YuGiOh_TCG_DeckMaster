@@ -29,16 +29,20 @@ class DetailDeckFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Beobachtet das ausgewählte Deck im FireBaseViewModel
         fireBaseViewModel.selectedDeck.observe(viewLifecycleOwner) {deck ->
 
+            // Erstellt Adapter für das Hauptdeck, das Extra-Deck und das Side-Deck
             val adapterMainDeck = DeckDetailAdapter(viewModel, fireBaseViewModel, deck!!)
             val adapterExtraDeck = DeckDetailAdapter(viewModel, fireBaseViewModel, deck!!)
             val adapterSideDeck = DeckDetailAdapter(viewModel, fireBaseViewModel, deck!!)
 
+            // Setzt die Adapter für die entsprechenden RecyclerViews
             binding.recyclerViewMainDeck.adapter = adapterMainDeck
             binding.recyclerViewExtraDeck.adapter = adapterExtraDeck
             binding.recyclerViewSideDeck.adapter = adapterSideDeck
 
+            // Überprüft, ob das Deck nicht null ist, und reicht die Liste der Karten an die Adapter weiter
             if (deck != null) {
                 adapterMainDeck.submitList(deck.mainDeck)
                 adapterExtraDeck.submitList(deck.extraDeck)
@@ -48,9 +52,9 @@ class DetailDeckFragment : Fragment() {
         }
 
 
-        binding.expandMainDeck.setOnClickListener {
-            binding.recyclerViewMainDeck.visibility = View.VISIBLE
-        }
+//        binding.expandMainDeck.setOnClickListener {
+//            binding.recyclerViewMainDeck.visibility = View.VISIBLE
+//        }
 
         binding.mtbDetailDeck.setNavigationOnClickListener {
             findNavController().navigateUp()

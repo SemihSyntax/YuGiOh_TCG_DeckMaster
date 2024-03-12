@@ -32,11 +32,14 @@ class BanlistAdapter(private val viewModel: MainViewModel
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val card = dataset[position]
 
+
         holder.binding.tvBannedCardName.text = card.name
+        // Setzen des Ban-Stils in das entsprechende TextView (falls verfügbar)
         holder.binding.tvBanStyle.text = card.banlist_info?.ban_tcg ?: "error"
         holder.binding.ivBannedCardImage.load(card.card_images.first().image_url_cropped)
 
         holder.binding.mcvBanlist.setOnClickListener {
+            // Setzen der ausgewählten Karte im ViewModel
             viewModel.selectedCard = card
             holder.itemView.findNavController().navigate(BanlistFragmentDirections.actionBanlistFragmentToCardDetailFragment())
         }

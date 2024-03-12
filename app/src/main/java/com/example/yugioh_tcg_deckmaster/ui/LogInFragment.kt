@@ -29,16 +29,19 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Beobachtet das errorMessage LiveData-Objekt des ViewModels und zeigt eine Toast-Nachricht an, wenn ein Fehler auftritt
         viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
             if (!errorMessage.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
             }
         }
 
+        // Setzt den OnClickListener für die Anmeldeschaltfläche
         binding.btnLogin.setOnClickListener {
             viewModel.login(binding.etEmailUsername.text.toString(), binding.etPassword.text.toString())
         }
 
+        // Setzt den OnClickListener für den Link zur Registrierung
         binding.tvSignUpLink.setOnClickListener {
             findNavController().navigate(LogInFragmentDirections.actionLogInFragmentToSignUpFragment())
         }

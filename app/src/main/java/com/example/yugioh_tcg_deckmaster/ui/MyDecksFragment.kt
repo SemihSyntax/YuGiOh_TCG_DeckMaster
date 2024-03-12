@@ -31,27 +31,33 @@ class MyDecksFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ruft die Decks von Firebase ab
         fireBaseViewModel.getDecksFromFireBase()
 
+        // Setzt den RecyclerView-Adapter
         val adapter = MyDecksAdapter(fireBaseViewModel)
         binding.rvMyDecks.adapter = adapter
 
-
+        // Beobachtet Änderungen in der Deck-Liste und aktualisiert den Adapter
         fireBaseViewModel.myDecks.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
+        // Ruft den Benutzernamen ab und aktualisiert die UI
         fireBaseViewModel.getUserName()
         fireBaseViewModel.username.observe(viewLifecycleOwner) {
-            binding.tvUserDecks.text = it+"'s Decks"
+            binding.tvUserDecks.text = "$it's Decks"
         }
 
+        // Setzt den Klick-Listener für den FAB zum Erstellen eines neuen Decks
         binding.floatingActionButton.setOnClickListener {
             openDeckNameInputDialog()
         }
-
     }
 
+    /**
+     * Öffnet einen Dialog zur Eingabe des Namens für ein neues Deck.
+     */
     private fun openDeckNameInputDialog() {
         val inputField = EditText(requireContext())
         MaterialAlertDialogBuilder(requireContext())
@@ -60,13 +66,9 @@ class MyDecksFragment : Fragment() {
             .setView(inputField)
             .setPositiveButton("Create") { _, _ ->
                 val deckName = inputField.text.toString()
-                // Hier wird der Code für das Hinzufügen des leeren Decks mit dem Namen ausgeführt
+                // Erstellt ein neues Deck mit dem angegebenen Namen und fügt es Firebase hinzu
                 val newDeck = Deck(Timestamp.now(), emptyList(), emptyList(), emptyList(), deckName)
                 fireBaseViewModel.addDeckToFireBase(newDeck)
-
-                // Optional: Aktualisiere die UI, um das neue Deck anzuzeigen
-                // Hier könntest du LiveData verwenden, um die UI automatisch zu aktualisieren
-                // viewModel.updateDeckList(deckList)
             }
             .setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()

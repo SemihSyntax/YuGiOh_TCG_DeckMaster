@@ -35,11 +35,13 @@ class MyDecksAdapter(private val fireBaseViewModel: FireBaseViewModel
         holder.binding.tvDeckName.text = deck.name
 
         holder.binding.mcvDeck.setOnClickListener {
+            // Setzen des ausgewählten Decks im ViewModel
             fireBaseViewModel.setSelectedDeck(deck)
             holder.itemView.findNavController().navigate(R.id.detailDeckFragment)
         }
 
         holder.binding.mcvDeck.setOnLongClickListener {
+            // Erstellen des Dialogs zum Löschen des Decks
             MaterialAlertDialogBuilder(holder.itemView.context)
                 .setTitle("Delete deck")
                 .setMessage("Are you sure you want to delete this deck?")

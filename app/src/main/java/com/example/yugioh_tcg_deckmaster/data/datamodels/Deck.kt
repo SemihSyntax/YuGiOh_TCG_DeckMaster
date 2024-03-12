@@ -10,6 +10,7 @@ data class Deck(
     var name: String
 ) {
 
+    // Methode zum Konvertieren des Decks in eine HashMap (zum abspeichern in FireBase)
     fun toHashMap(): HashMap<String, Any> {
         return hashMapOf(
             "timeStamp" to timeStamp,
@@ -20,6 +21,7 @@ data class Deck(
         )
     }
 
+    // Statische Methode zum Erstellen eines Deck-Objekts aus einer Map (aus FireBase)
     companion object {
         fun fromMap(map: Map<String, Any>): Deck {
             val timeStamp = map["timeStamp"] as Timestamp

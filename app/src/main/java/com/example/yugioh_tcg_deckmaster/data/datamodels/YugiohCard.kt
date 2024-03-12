@@ -21,6 +21,8 @@ data class YugiohCard(
     val banlist_info: Banlist? = null,
     val card_prices: List<CardPrice> = emptyList()
 ) {
+
+    // Konvertiert das YugiohCard-Objekt in eine HashMap (zum abspeichern in FireBase)
     fun toHashMap(): Map<String, Any?> {
         return hashMapOf(
             "id" to id,
@@ -29,6 +31,7 @@ data class YugiohCard(
         )
     }
 
+    // Erstellt ein YugiohCard-Objekt aus einer gegebenen Map (aus FireBase)
     companion object {
         @JvmStatic
         fun fromMap(map: Map<String, Any?>): YugiohCard {

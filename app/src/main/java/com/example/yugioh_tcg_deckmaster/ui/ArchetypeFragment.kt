@@ -28,15 +28,19 @@ class ArchetypeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ruft alle Kartentypen ab
         viewModel.getAllArchetypes()
 
+        // Erstellt einen Adapter für die Anzeige der Kartentypen
         val adapter = ArchetypeAdapter()
         binding.rvAllArchetypes.adapter = adapter
 
+        // Beobachtet die Änderungen an der Liste der Kartentypen und aktualisiert den Adapter
         viewModel.allArchetypes.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
+        // Setzt den Klick-Listener für das Navigations-Icon
         binding.mtbAllArchetypes.setNavigationOnClickListener {
             findNavController().navigateUp()
         }

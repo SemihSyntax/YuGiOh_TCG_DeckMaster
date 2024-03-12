@@ -1,6 +1,5 @@
 package com.example.yugioh_tcg_deckmaster
 
-import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,6 +26,11 @@ class FireBaseViewModel : ViewModel() {
         get() = _selectedDeck
 
 
+    private val _myDecks = MutableLiveData<List<Deck>>()
+    val myDecks: LiveData<List<Deck>>
+        get() = _myDecks
+
+
     private val _errorMessage: MutableLiveData<String> = MutableLiveData()
     val errorMessage: LiveData<String>
         get() = _errorMessage
@@ -42,10 +46,6 @@ class FireBaseViewModel : ViewModel() {
     private val _username = MutableLiveData<String?>()
     val username: LiveData<String?>
         get() = _username
-
-    private val _myDecks = MutableLiveData<List<Deck>>()
-    val myDecks: LiveData<List<Deck>>
-        get() = _myDecks
 
 
     //Das profile Document enthält ein einzelnes Profil(das des eingeloggten Users)
@@ -63,20 +63,18 @@ class FireBaseViewModel : ViewModel() {
     //Richtet die Variablen ein die erst eingerichtet werden können
     //wenn der User eingeloggt ist
     fun setupUserEnv() {
-
         _user.value = auth.currentUser
 
         //Alternative Schreibweise um auf null Werte zu überprüfen
         auth.currentUser?.let { firebaseUser ->
-
             profileRef = firestore.collection("user").document(firebaseUser.uid)
-
         }
-
     }
 
+    /**
+     * Registriert einen neuen Benutzer mit der angegebenen E-Mail, Passwort und Benutzername.
+     */
     fun register(email: String, password: String, username: String) {
-
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 //User wurde erstellt
@@ -86,16 +84,16 @@ class FireBaseViewModel : ViewModel() {
                 val newProfile = Profile(email, username)
                 profileRef.set(newProfile)
 
-
             } else {
                 _errorMessage.value = it.exception?.message
             }
         }
-
     }
 
+    /**
+     * Meldet einen Benutzer mit der angegebenen E-Mail und Passwort an.
+     */
     fun login(email: String, password: String) {
-
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 //User wurde eingeloggt
@@ -106,11 +104,12 @@ class FireBaseViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Meldet den aktuellen Benutzer ab.
+     */
     fun logout() {
-
         auth.signOut()
         setupUserEnv()
-
     }
 
 
@@ -127,6 +126,9 @@ class FireBaseViewModel : ViewModel() {
 //    }
 
 
+    /**
+     * Ruft den Benutzernamen des aktuellen Benutzers aus der Firestore-Datenbank ab.
+     */
     fun getUserName() {
         try {
             profileRef?.get()?.addOnSuccessListener {
@@ -141,10 +143,12 @@ class FireBaseViewModel : ViewModel() {
         }
     }
 
+
+    /**
+     * Fügt ein neues Deck zum Firestore hinzu.
+     */
     fun addDeckToFireBase(deck: Deck) {
-
         val timeStamp = Timestamp.now()
-
         val deckData = deck.toHashMap()
 
         profileRef.collection("myDecks").document(timeStamp.toString())
@@ -155,8 +159,10 @@ class FireBaseViewModel : ViewModel() {
             }
     }
 
+    /**
+     * Löscht ein Deck aus dem Firestore.
+     */
     fun deleteDeckFromFireBase(deck: Deck) {
-
         profileRef.collection("myDecks").document(deck.timeStamp.toString())
             .delete().addOnSuccessListener {
                 Log.e("FireBase", "Deck erfolgreich gelöscht")
@@ -165,6 +171,9 @@ class FireBaseViewModel : ViewModel() {
             }
     }
 
+    /**
+     * Ruft die Decks des Benutzers aus dem Firestore ab und aktualisiert die LiveData.
+     */
     fun getDecksFromFireBase() {
         val deckRefs = firestore.collection("user").document(auth.uid ?: "")
             .collection("myDecks")
@@ -185,14 +194,15 @@ class FireBaseViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Aktualisiert ein vorhandenes Deck im Firestore.
+     */
     fun updateDeckInFirebase(deckId: String, updatedDeck: Deck) {
         val userId = auth.uid
 
         if (userId != null) {
             val deckReference = firestore.collection("user").document(userId)
                 .collection("myDecks").document(deckId)
-
-            Log.d("UpdateDeck", updatedDeck.mainDeck.toString())
 
             val updateData = updatedDeck.toHashMap()
 
@@ -208,6 +218,9 @@ class FireBaseViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Löscht eine Karte aus einem Deck im Firestore.
+     */
     fun deleteCardFromDeckInFireBase(yugiohCard: YugiohCard, deck: Deck) {
         // Verweise auf das Dokument
         val docRef = profileRef.collection("myDecks").document(deck.timeStamp.toString())
@@ -244,8 +257,10 @@ class FireBaseViewModel : ViewModel() {
             }
     }
 
+    /**
+     * Setzt das ausgewählte Deck im ViewModel.
+     */
     fun setSelectedDeck(deck: Deck) {
-
         _selectedDeck.value = deck
     }
 

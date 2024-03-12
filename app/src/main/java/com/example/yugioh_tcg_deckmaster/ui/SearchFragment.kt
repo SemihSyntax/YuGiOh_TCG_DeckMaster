@@ -29,18 +29,22 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = SearchAdapter(viewModel,fireBaseViewModel)
+        // Erstellt den Adapter für die Suchergebnisse
+        val adapter = SearchAdapter(viewModel, fireBaseViewModel)
         binding.rvSearchResults.adapter = adapter
 
-        viewModel.searchResults.observe(viewLifecycleOwner) {
-            if (it != null) {
+        // Beobachtet die Suchergebnisse und aktualisiert den Adapter entsprechend
+        viewModel.searchResults.observe(viewLifecycleOwner) { searchResults ->
+            searchResults?.let {
                 adapter.submitList(it)
             }
         }
 
-        binding.editTextSearch.addTextChangedListener {
-            viewModel.searchCard(it.toString())
+        // Setzt den Text-Listener für die Sucheingabe
+        binding.editTextSearch.addTextChangedListener { editable ->
+            editable?.let {
+                viewModel.searchCard(it.toString())
+            }
         }
-
     }
 }

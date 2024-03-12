@@ -27,21 +27,23 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setzt den Klick-Listener für die Logout-Schaltfläche
         binding.buttonLogOut.setOnClickListener {
             fireBaseViewModel.logout()
         }
 
+        // Setzt den Klick-Listener für das Navigations-Icon
         binding.mtProfile.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
 
+        // Zeigt die E-Mail-Adresse des Benutzers an
         binding.textViewEmail.text = fireBaseViewModel.auth.currentUser?.email
 
+        // Ruft den Benutzernamen ab und aktualisiert die UI
         fireBaseViewModel.getUserName()
         fireBaseViewModel.username.observe(viewLifecycleOwner) {
             binding.textViewUsername.text = it
         }
-
     }
-
 }

@@ -23,21 +23,27 @@ private val retrofit  = Retrofit.Builder()
 
 interface DeckMasterApiService {
 
+    // gibt die Banliste aus der API wieder
     @GET("cardinfo.php")
     suspend fun getBanList(@Query("banlist") tcg: String = "tcg") : YugiohCardData
 
+    // gibt eine zufällige Karte aus der API wieder
     @GET("randomcard.php")
     suspend fun getRandomCard(): YugiohCard
 
+    // gibt alle Karten aus der API wieder
     @GET("cardinfo.php")
     suspend fun getAllCards(): YugiohCardData
 
+    // gibt die Karte mit dessen ID aus der API wieder
     @GET("cardinfo.php")
     suspend fun getCardById(@Query ("id") id: Int): YugiohCardData
 
+    // gibt alle Archetypes von Yugioh Karten aus der API wieder
     @GET("archetypes.php")
     suspend fun getAllArchetypes() : List<Archetype>
 
+    // gibt alle Yugioh Karten mit dem Archetype aus der API wieder
     @GET("cardinfo.php")
     suspend fun getCardsByArchetype(@Query ("archetype") archetype: String) : YugiohCardData
 

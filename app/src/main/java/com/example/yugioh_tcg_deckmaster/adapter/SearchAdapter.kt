@@ -46,11 +46,8 @@ class SearchAdapter (private val viewModel : MainViewModel, private val fireBase
         }
 
         holder.binding.btnAddToDeck.setOnClickListener {
-
+            // Anzeigen des Dialogs zur Auswahl des Decks
             showDeckSelectionDialog(holder, fireBaseViewModel.myDecks.value?: emptyList(), yugiohCard)
-
-            Log.d("hilfe", "${fireBaseViewModel.myDecks.value}")
-
         }
     }
 
@@ -58,6 +55,7 @@ class SearchAdapter (private val viewModel : MainViewModel, private val fireBase
         return dataset.size
     }
 
+    // Funktion zum Anzeigen eines Dialogs zur Auswahl des Decks
     private fun showDeckSelectionDialog(holder: ItemViewHolder, decks: List<Deck>,card: YugiohCard) {
         val deckNames = decks.map {
             it.name
@@ -68,19 +66,18 @@ class SearchAdapter (private val viewModel : MainViewModel, private val fireBase
         MaterialAlertDialogBuilder(holder.itemView.context)
             .setTitle("Select deck")
             .setSingleChoiceItems(deckNames, -1) { dialog, which ->
-                // Hier wird der ausgewählte Index (which) oder der ausgewählte Deck-Name verwendet
+                // Hier wird das ausgewählte Deck gesetzt
                 selectedDeck = decks[which]
-                // Mach etwas mit dem ausgewählten Deck
-
             }
-            // Hier kannst du eine Aktion beim Bestätigen hinzufügen
             .setPositiveButton("OK") { _, _ ->
+                // Hinzufügen der Karte zum ausgewählten Deck
                 val mainDeck = selectedDeck?.mainDeck
                 val newMainDeck = mainDeck?.plus(card)
                 if (newMainDeck != null) {
                     selectedDeck?.mainDeck = newMainDeck
                 }
                 selectedDeck?.let {
+                    // Aktualisieren des Decks in der Firebase-Datenbank
                     fireBaseViewModel.updateDeckInFirebase(selectedDeck?.timeStamp.toString(),
                         it
                     )

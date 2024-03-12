@@ -28,15 +28,19 @@ class BanlistFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Ruft die Verbotenen- und Limitierten-Liste ab
         viewModel.getBanList()
 
+        // Erstellt einen Adapter für die Anzeige der Verbotenen- und Limitierten-Liste
         val adapter = BanlistAdapter(viewModel)
         binding.rvBanlistTcg.adapter = adapter
 
+        // Beobachtet die Änderungen an der Verbotenen- und Limitierten-Liste und aktualisiert den Adapter
         viewModel.banListTcg.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
+        // Setzt den Klick-Listener für das Navigations-Icon
         binding.mtbBanListTCV.setNavigationOnClickListener {
             findNavController().navigateUp()
         }

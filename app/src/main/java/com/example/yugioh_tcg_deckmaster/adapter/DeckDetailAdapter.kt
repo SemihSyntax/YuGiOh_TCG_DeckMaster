@@ -39,14 +39,14 @@ class DeckDetailAdapter(private val viewModel: MainViewModel, private val fireBa
         holder.binding.ivItemDeckCard.load(yugiohCard.card_images.first().image_url)
 
         holder.binding.ivItemDeckCard.setOnClickListener {
+            // Setzen der ausgewählten Karte im ViewModel
             viewModel.selectedCard = yugiohCard
-            Log.d("hilfeee",yugiohCard.toString())
             holder.itemView.findNavController().navigate(DetailDeckFragmentDirections.actionDetailDeckFragmentToCardDetailFragment())
         }
 
-        // In your activity or fragment
+
         holder.binding.ivItemDeckCard.setOnLongClickListener {
-            // Create the dialog
+            // Erstellen des Dialogs zum Löschen der Karte aus dem Deck
             MaterialAlertDialogBuilder(holder.itemView.context)
                 .setTitle("Delete Card")
                 .setMessage("Do you want to remove this card from the deck?")

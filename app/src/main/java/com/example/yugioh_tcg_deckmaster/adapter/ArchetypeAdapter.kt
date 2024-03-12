@@ -13,6 +13,7 @@ class ArchetypeAdapter(
 
 ) : RecyclerView.Adapter<ArchetypeAdapter.ItemViewHolder>(){
 
+
     private var dataset = listOf<Archetype>()
     inner class ItemViewHolder(val binding: ItemArchetypeBinding): RecyclerView.ViewHolder(binding.root)
 

@@ -32,6 +32,7 @@ class CardDetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        // Konfiguriert das WebView für die Anzeige der Karten-URL
         binding.wvDetailCard.webViewClient = WebViewClient()
         binding.wvDetailCard.loadUrl(viewModel.selectedCard?.ygoprodeck_url.toString())
     }
