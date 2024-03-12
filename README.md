@@ -12,6 +12,8 @@ Willkommen zur Yu-Gi-Oh! TCG Deckmaster-App! Diese App bietet eine umfassende Pl
 
 - **Archetypen-Informationen:** Erfahren Sie mehr über verschiedene Kartensätze und Archetypen und entdecken Sie, wie Sie sie effektiv in Ihren Decks einsetzen können.
 
+- **Lebenspunkte-Rechner:** Verfolgen und verwalten Sie die Lebenspunkte während eines Duells mit dem Lebenspunkte-Rechner.
+
 ### Wie man die App benutzt
 
 1. **Deckverwaltung:** Gehen Sie zum Deckmanager, um neue Decks zu erstellen oder vorhandene zu bearbeiten. Fügen Sie Karten hinzu, organisieren Sie Ihr Deck und speichern Sie es für zukünftige Schlachten.
@@ -21,6 +23,8 @@ Willkommen zur Yu-Gi-Oh! TCG Deckmaster-App! Diese App bietet eine umfassende Pl
 3. **Sperrlisten:** Überprüfen Sie regelmäßig die Sperrlisten, um sicherzustellen, dass Ihre Decks den aktuellen Regeln entsprechen. Passen Sie Ihre Decks entsprechend an, um wettbewerbsfähig zu bleiben.
 
 4. **Archetypen:** Erfahren Sie mehr über verschiedene Archetypen und wie Sie sie in Ihren Decks verwenden können. Erkunden Sie ihre einzigartigen Eigenschaften und Strategien.
+
+5. **Lebenspunkte-Rechner:** Geben Sie die Startlebenspunkte ein und aktualisieren Sie sie entsprechend den Ereignissen im Spiel, wie z.B. Schaden durch Angriffe oder Effekte. Behalten Sie den Überblick über den Spielstand und führen Sie das Duell effektiv mit dem Lebenspunkte-Rechner.
 
 ### Technische Details
 
