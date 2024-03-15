@@ -103,13 +103,13 @@ class LifePointsFragment : Fragment() {
 
         if (player1LifePoints <= 0 && player2LifePoints <= 0) {
             // Beide Spieler haben 0 Lebenspunkte erreicht, es ist unentschieden
-            Toast.makeText(context, "Es ist unentschieden!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "It's a draw", Toast.LENGTH_SHORT).show()
         } else if (player1LifePoints <= 0) {
             // Spieler 2 gewinnt
-            Toast.makeText(context, "Spieler 2 gewinnt!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Player 2 wins!", Toast.LENGTH_SHORT).show()
         } else if (player2LifePoints <= 0) {
             // Spieler 1 gewinnt
-            Toast.makeText(context, "Spieler 1 gewinnt!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Player 1 wins!", Toast.LENGTH_SHORT).show()
         }
     }
 

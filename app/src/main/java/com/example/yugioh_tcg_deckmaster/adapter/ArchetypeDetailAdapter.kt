@@ -47,12 +47,8 @@ class ArchetypeDetailAdapter (private val viewModel : MainViewModel, private val
         }
 
         holder.binding.btnArchetypeDetailAddToDeck.setOnClickListener {
-
             // Anzeigen eines Dialogs zur Auswahl des Decks
             showDeckSelectionDialog(holder, fireBaseViewModel.myDecks.value?: emptyList(), yugiohCard)
-
-            Log.d("hilfe", "${fireBaseViewModel.myDecks.value}")
-
         }
     }
 

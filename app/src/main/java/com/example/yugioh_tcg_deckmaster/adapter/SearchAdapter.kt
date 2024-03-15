@@ -41,6 +41,7 @@ class SearchAdapter (private val viewModel : MainViewModel, private val fireBase
         holder.binding.textViewCardName.text = yugiohCard.name
 
         holder.binding.mcvSearchCard.setOnClickListener {
+            // Setzen der ausgewählten Karte im ViewModel
             viewModel.selectedCard = yugiohCard
             holder.itemView.findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToCardDetailFragment())
         }

@@ -78,8 +78,6 @@ class Repository(private val api: DeckMasterApi) {
     /**
      * Entfernt Sonderzeichen und Leerzeichen aus dem Kartennamen.
      *
-     * @param name Der zu säubernde Kartennamen.
-     * @return Der gesäuberte Kartennamen.
      */
     private fun sanitizeCardName(name: String): String {
         return name.replace(Regex("[^a-z0-9]"), "")

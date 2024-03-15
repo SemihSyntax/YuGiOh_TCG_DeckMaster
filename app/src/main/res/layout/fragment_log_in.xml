@@ -24,7 +24,7 @@
             android:id="@+id/etEmailUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Emai address / Username"
+            android:hint="Email address / Username"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>

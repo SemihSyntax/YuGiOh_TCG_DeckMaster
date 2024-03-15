@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         navHost.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.cardDetailFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.logInFragment -> binding.bottomNavigationView.visibility = View.GONE
+                R.id.signUpFragment -> binding.bottomNavigationView.visibility = View.GONE
                 else -> binding.bottomNavigationView.visibility = View.VISIBLE
             }
         }
